@@ -1,0 +1,78 @@
+// Filename: LStack.template
+// Date Created: 04/10/2012
+// Author: Lance Baker
+// Course: SENG6120
+// Student Number: c3128034
+
+#include <iostream>
+#include <cstdlib>
+#include "LinkedList.h"
+
+namespace lance_project {
+	
+	// The default constructor for the stack, 
+	// instantiates the linked list.
+	template <class T>
+	LStack<T>::LStack() {
+		this->linked_list = new LinkedList<T>();
+	}
+	
+	// The destructor which deletes the residing linked list.
+	template <class T>
+	LStack<T>::~LStack() {
+		delete this->linked_list;
+	}
+	
+	// The push method adds the received value
+	// to the last position of the internal linked list.
+	template <class T>
+	void LStack<T>::push(T* value) {
+		this->linked_list->addFirst(value);
+	}
+	
+	// The pop method removes the first element from the
+	// linked list, and returns the data.
+	template <class T>
+	T* LStack<T>::pop() {
+		// Ensures the head node exists.
+		if (this->linked_list->getHead() != NULL) {
+			// Fetches the data from the head node.
+			T* data = this->linked_list->getHead()->data();
+			// Removes the head.
+			this->linked_list->removeHead();
+			return data; // Returns the data.
+		}
+		// Otherwise it returns null.
+		return NULL;
+	}
+	
+	// The size method returns the size of the linked list.
+	template <class T>
+	int LStack<T>::size() {
+		return this->linked_list->getSize();
+	}
+	
+	// The isEmpty method returns a boolean indicating whether
+	// the stack is empty or not.
+	template <class T>
+	bool LStack<T>::empty() {
+		return (this->linked_list->getSize() == 0);
+	}
+	
+	// The front method returns the first element (without removing it).
+	template <class T>
+	T* LStack<T>::front() {
+		// Ensures the head node exists.
+		if (this->linked_list->getHead() != NULL) {
+			// Fetches the data from the head node and returns it.
+			return this->linked_list->getHead()->data();
+		}
+		// Otherwise returns null.
+		return NULL;
+	}
+	
+	template <class T>
+	LinkedList<T>* LStack<T>::getList() {
+		return this->linked_list;
+	}
+}
